@@ -1,0 +1,51 @@
+library(magick)
+calling <- image_read("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSy2ZpKu2vua69IUNOh1qZQ0zdfMuO2e3QKBA&usqp=CAU") %>%
+  image_scale(500)
+
+crying <- image_read("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj34pGv-jdCbM1QjteS_r_W6teO76-2NjeUQ&usqp=CAU") %>%
+  image_scale(500)
+
+HP_phone <- image_read("http://wx4.sinaimg.cn/large/006APoFYly1fkdtaic7bej308c08cglo.jpg") %>%
+  image_scale(500)
+
+hello_text <- image_blank(width = 500,
+                          height = 500,
+                          color = "#000000") %>%
+  image_annotate(text = "Is the meal ready?",
+                 color = "#FFFFFF",
+                 size = 80,
+                 font = "Impact",
+                 gravity = "center")
+
+hell_text <- image_blank(width = 500,
+                         height = 500,
+                         color = "#000000") %>%
+  image_annotate(text = "Still not?",
+                 color = "#FFFFFF",
+                 size = 80,
+                 font = "Impact",
+                 gravity = "center")
+
+hel_text <- image_blank(width = 500,
+                       height = 500,
+                       color = "#000000") %>%
+  image_annotate(text = "Lets takeway",
+                 color = "#FFFFFF",
+                 size = 80,
+                 font = "Impact",
+                 gravity = "center")
+
+first_row <- c(calling, hello_text) %>%
+  image_append()
+
+second_row <- c(crying, hell_text) %>%
+  image_append()
+
+third_row <- c(HP_phone, hel_text) %>%
+  image_append()
+
+c(first_row, second_row, third_row) %>%
+  image_append(stack = TRUE)
+
+meme <- image_read("http://localhost:23773/session/preview.jpeg?viewer_pane=1&capabilities=1&host=http%3A%2F%2F127.0.0.1%3A36280")
+image_write(meme, "Wyue406_meme.png")
